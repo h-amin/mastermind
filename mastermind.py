@@ -1,6 +1,6 @@
 import random
 
-mastermind_secret_code = 'G G B R'
+mastermind_secret_code = "GGBR"
 kleuren = ["R", "B", "G", "Y"]
 master_lst = []
 random_code = []
@@ -14,18 +14,18 @@ random_code.append(random.choice(master_lst))
 print(random_code)
 
 
-def beoordelingsfunctie():  # Functie dat feedback weergeeft op de random_gok uit kleuren lijst.
+def beoordelingsfunctie():  # Systeem vs gebruiker
     random_gok = input("geef hier uw gok: ")
-    feedback = []  # Feedback is 1. zwart, 2. wit of 3. null
+    feedback = []  # Feedback is zwart = 2, wit = 1, null = 0
     for i in range(len(master_lst)):
-        if kleuren[i] == random_gok[i]:
-            feedback.append("zwart")
-        elif random_gok[i] in kleuren:
-            feedback.append("wit")
+        if mastermind_secret_code[i] == random_gok[i]:
+            feedback.append(2)
+        elif random_gok[i] in mastermind_secret_code:
+            feedback.append(1)
         else:
-            feedback.append("null")
+            feedback.append(0)
     for j in feedback:
-        print(j)
+        print(j, end="")
 
 
 beoordelingsfunctie()
