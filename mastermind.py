@@ -36,7 +36,9 @@ while True:
             break
 
         elif alg_pref == "3":
-            print("You have chosen to go with the third (............) algorithm")
+            print("You have chosen to go with the third unique (strategy) algorithm")
+            n = functions.unique_algorithm()
+            break
 
     elif x == "help":
         print("Game mode number 1: Player will have to guess the secret code made by the system.")
