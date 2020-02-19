@@ -1,29 +1,43 @@
 def master_list():
-    import random
     kleuren = ["R", "B", "G", "Y"]
     master_lst = []
-    random_code = []
 
     for R in range(len(kleuren)):
         for B in range(len(kleuren)):
             for G in range(len(kleuren)):
                 for Y in range(len(kleuren)):
                     master_lst.append([kleuren[R], kleuren[B], kleuren[G], kleuren[Y]])
-    random_code.append(random.choice(master_lst))
-    return random_code
+    return master_lst
+
+
+def secret_code_generator():
+    import random
+    kleuren = ["R", "B", "G", "Y"]
+    random_secret = []
+    for i in kleuren:
+        random_secret.append(random.choice(kleuren))
+    return random_secret
 
 
 def random_guess():
-    x = input("Geef hier uw random gok, keuze uit [R B G Y]: ")
+    x = input("Please give your combination of the following -> [R B G Y]: ")
     y = x.upper()
     z = [word for line in y for word in line.split()]
     if len(z) != 4:
-        print("ERROR: lengte van opgegeven code is ongeldig.")
+        print("ERROR: Length of code is not valid. Please try again.")
+    return z
+
+
+def user_secret_code():
+    x = input("What will the secret code be? Use the following characters in a random order. [R B G Y]: ")
+    y = x.upper()
+    z = [word for line in y for word in line.split()]
+    if len(z) != 4:
+        print("ERROR: Length of code is not valid. Please try again.")
     return z
 
 
 def beoordelingsfunctie(x, y):
-
     black_pin = 0
     white_pin = 0
     temporary_lst = []
@@ -43,7 +57,25 @@ def beoordelingsfunctie(x, y):
     return black_pin, white_pin
 
 
-c = beoordelingsfunctie(x=["G", "G", "B", "R"], y=random_guess())
-zwart_pin = c[0]
-wit_pin = c[1]
-print("Zwart is", zwart_pin, "Wit is", wit_pin)
+def simple_algorithm():
+    secret_code = user_secret_code()
+
+    while len(master_list()) > 1:
+        random_code = secret_code_generator()
+
+        first_assessment = (beoordelingsfunctie(x=secret_code, y=random_code))
+
+        if first_assessment == (4, 0):
+            print("Congratulations! The secret code:", random_code, "has been found!")
+            break
+
+        for i in range(len(master_list())):
+            random_code_2 = secret_code_generator()
+
+            second_assessment = (beoordelingsfunctie(x=random_code, y=random_code_2))
+
+            if first_assessment != second_assessment:
+                master_list().remove(random_code_2)
+    return
+
+def worst_case_algorithm():
