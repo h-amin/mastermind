@@ -28,9 +28,13 @@ while True:
         if alg_pref == "1":
             print("You have chosen to go with the first (simple strategy) algorithm.")
             n = functions.simple_algorithm()
+
             break
         elif alg_pref == "2":
             print("You have chosen to go with the second (worst case strategy) algorithm.")
+            n = functions.worst_case_algorithm()
+            break
+
         elif alg_pref == "3":
             print("You have chosen to go with the third (............) algorithm")
 
